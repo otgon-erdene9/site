@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Хоол.МН — Монгол Хоолны Жорны Платформ</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <div class="logo">Хоол<span class="accent">.</span>МН</div>
+    <div class="search-wrap">
+      <svg class="search-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+      <input type="text" id="searchInput" placeholder="Хоол хайх..." oninput="filterRecipes()">
+    </div>
+    <nav class="nav-links">
+      <a href="#featured">Онцлох</a>
+      <a href="#all">Бүх жор</a>
+      <a href="#categories">Ангилал</a>
+    </nav>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <p class="hero-eyebrow">Монгол болон дэлхийн хоолны жорнууд</p>
+    <h1 class="hero-title">Өнөөдөр юу<br><em>хийх вэ?</em></h1>
+    <p class="hero-sub">Шилдэг жорнуудыг нэг дороос олж, гэртээ хялбараар хоол хийнэ үү.</p>
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num">9+</span><span class="stat-label">Жор</span></div>
+      <div class="stat-sep"></div>
+      <div class="stat"><span class="stat-num">4</span><span class="stat-label">Ангилал</span></div>
+      <div class="stat-sep"></div>
+      <div class="stat"><span class="stat-num">100%</span><span class="stat-label">Монгол</span></div>
+    </div>
+  </div>
+  <div class="hero-img-wrap">
+    <img src="images/khorkhog.jpg" alt="Хорхог" class="hero-img">
+    <div class="hero-badge">⭐ Онцлох хоол</div>
+  </div>
+</section>
+
+<!-- CATEGORY FILTERS -->
+<section class="filter-bar" id="categories">
+  <div class="container">
+    <button class="filter-btn active" onclick="setFilter('all', this)">Бүгд</button>
+    <button class="filter-btn" onclick="setFilter('mongolian', this)">🇲🇳 Монгол</button>
+    <button class="filter-btn" onclick="setFilter('asian', this)">🌏 Азийн</button>
+    <button class="filter-btn" onclick="setFilter('european', this)">🇪🇺 Европ</button>
+    <button class="filter-btn" onclick="setFilter('salad', this)">🥗 Салат</button>
+    <button class="filter-btn" onclick="setFilter('dessert', this)">🧁 Цөцгий</button>
+  </div>
+</section>
+
+<!-- FEATURED -->
+<section class="section" id="featured">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Онцлох жорнууд</h2>
+      <span class="section-line"></span>
+    </div>
+    <div class="featured-grid">
+      <div class="recipe-card featured-main" onclick="openModal('khorkhog')" data-cat="mongolian">
+        <div class="card-img-wrap">
+          <img src="images/khorkhog.jpg" alt="Хорхог" class="card-img">
+          <div class="card-overlay">
+            <span class="card-tag">Монгол</span>
+            <h3 class="card-title">Хорхог</h3>
+            <div class="card-meta">
+              <span>⏱ 2 цаг</span>
+              <span>👥 4 хүн</span>
+              <span>🔥 Дунд</span>
+            </div>
+          </div>
+          <div class="badge-hot">🔥 Онцлох</div>
+        </div>
+      </div>
+      <div class="featured-side">
+        <div class="recipe-card" onclick="openModal('bansh')" data-cat="mongolian">
+          <div class="card-img-wrap short">
+            <img src="images/bansh.jpg" alt="Банш" class="card-img">
+            <div class="card-overlay">
+              <span class="card-tag">Монгол</span>
+              <h3 class="card-title">Банш</h3>
+              <div class="card-meta"><span>⏱ 30 мин</span><span>👥 4 хүн</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="recipe-card" onclick="openModal('ramen')" data-cat="asian">
+          <div class="card-img-wrap short">
+            <img src="images/ramen.jpg" alt="Рамен" class="card-img">
+            <div class="card-overlay">
+              <span class="card-tag">Азийн</span>
+              <h3 class="card-title">Рамен шөл</h3>
+              <div class="card-meta"><span>⏱ 45 мин</span><span>👥 2 хүн</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ALL RECIPES -->
+<section class="section bg-warm" id="all">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Бүх жорнууд</h2>
+      <span class="section-line"></span>
+    </div>
+    <div class="recipe-grid" id="recipeGrid">
+
+      <div class="recipe-card" onclick="openModal('khorkhog')" data-cat="mongolian" data-name="хорхог">
+        <div class="card-img-wrap">
+          <img src="images/khorkhog.jpg" alt="Хорхог" class="card-img">
+          <span class="card-tag-top">Монгол</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-name">Хорхог</h3>
+          <p class="card-desc">Уламжлалт монгол хоол. Гал болон чулуугаар хийдэг онцгой амттай мах.</p>
+          <div class="card-footer">
+            <span class="time-badge">⏱ 2 цаг</span>
+            <span class="diff easy">Дунд</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="recipe-card" onclick="openModal('bansh')" data-cat="mongolian" data-name="банш">
+        <div class="card-img-wrap">
+          <img src="images/bansh.jpg" alt="Банш" class="card-img">
+          <span class="card-tag-top">Монгол</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-name">Банш</h3>
+          <p class="card-desc">Монголын уламжлалт жижиг бууз. Усанд чанадаг амттай хоол.</p>
+          <div class="card-footer">
+            <span class="time-badge">⏱ 30 мин</span>
+            <span class="diff easy">Хялбар</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="recipe-card" onclick="openModal('tsuivan')" data-cat="mongolian" data-name="цуйван">
+        <div class="card-img-wrap">
+          <img src="images/tsuivan.jpg" alt="Цуйван" class="card-img">
+          <span class="card-tag-top">Монгол</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-name">Цуйван</h3>
+          <p class="card-desc">Монгол гурилан хоол. Махтай хольсон нудлын гайхалтай хослол.</p>
+          <div class="card-footer">
+            <span class="time-badge">⏱ 50 мин</span>
+            <span class="diff medium">Дунд</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="recipe-card" onclick="openModal('shol')" data-cat="mongolian" data-name="шөл">
+        <div class="card-img-wrap">
+          <img src="images/shol.jpg" alt="Шөл" class="card-img">
+          <span class="card-tag-top">Монгол</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-name">Мах шөл</h3>
+          <p class="card-desc">Дулаан, тэжээллэг монгол уламжлалт шөл. Өвлийн гайхалтай хоол.</p>
+          <div class="card-footer">
+            <span class="time-badge">⏱ 1.5 цаг</span>
+            <span class="diff easy">Хялбар</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="recipe-card" onclick="openModal('ramen')" data-cat="asian" data-name="рамен">
+        <div class="card-img-wrap">
+          <img src="images/ramen.jpg" alt="Рамен" class="card-img">
+          <span class="card-tag-top">Азийн</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-name">Рамен шөл</h3>
+          <p class="card-desc">Японы алдарт рамен. Баялаг шөл, нудлын гоё хослол.</p>
+          <div class="card-footer">
+            <span class="time-badge">⏱ 45 мин</span>
+            <span class="diff easy">Хялбар</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="recipe-card" onclick="openModal('curry')" data-cat="asian" data-name="карри">
+        <div class="card-img-wrap">
+          <img src="images/curry.jpg" alt="Карри" class="card-img">
+          <span class="card-tag-top">Азийн</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-name">Тахианы карри</h3>
+          <p class="card-desc">Зөөлөн тахиа, кокосын сүүтэй Энэтхэгийн уламжлалт карри.</p>
+          <div class="card-footer">
+            <span class="time-badge">⏱ 40 мин</span>
+            <span class="diff easy">Хялбар</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="recipe-card" onclick="openModal('pizza')" data-cat="european" data-name="пицца">
+        <div class="card-img-wrap">
+          <img src="images/pizza.jpg" alt="Пицца" class="card-img">
+          <span class="card-tag-top">Европ</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-name">Гэрийн пицца</h3>
+          <p class="card-desc">Италийн жинхэнэ пицца. Баялаг жигнэмэл, хайлсан бяслаг.</p>
+          <div class="card-footer">
+            <span class="time-badge">⏱ 1 цаг</span>
+            <span class="diff medium">Дунд</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="recipe-card" onclick="openModal('salad')" data-cat="salad" data-name="салат">
+        <div class="card-img-wrap">
+          <img src="images/salad.jpg" alt="Салат" class="card-img">
+          <span class="card-tag-top">Салат</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-name">Грек салат</h3>
+          <p class="card-desc">Свежийн хүнсний ногоо, фета бяслаг, чидун жимсний эрүүл салат.</p>
+          <div class="card-footer">
+            <span class="time-badge">⏱ 15 мин</span>
+            <span class="diff easy">Маш хялбар</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="recipe-card" onclick="openModal('muffin')" data-cat="dessert" data-name="маффин">
+        <div class="card-img-wrap">
+          <img src="images/muffin.jpg" alt="Маффин" class="card-img">
+          <span class="card-tag-top">Цөцгий</span>
+        </div>
+        <div class="card-body">
+          <h3 class="card-name">Шоколадтай маффин</h3>
+          <p class="card-desc">Зөөлөн, чийглэг шоколадтай маффин. Кофетой хамт дэгээ.</p>
+          <div class="card-footer">
+            <span class="time-badge">⏱ 35 мин</span>
+            <span class="diff easy">Хялбар</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div id="noResults" style="display:none; text-align:center; padding:3rem; color:#888;">
+      <p style="font-size:3rem; margin-bottom:1rem;">🔍</p>
+      <p>Хайлтад тохирох хоол олдсонгүй.</p>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <button class="modal-close" onclick="closeModalDirect()">✕</button>
+    <div class="modal-img-wrap">
+      <img id="modalImg" src="" alt="" class="modal-img">
+      <div class="modal-img-overlay">
+        <span id="modalTag" class="modal-tag-badge"></span>
+        <h2 id="modalTitle" class="modal-title"></h2>
+      </div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-meta-row" id="modalMeta"></div>
+      <div class="modal-cols">
+        <div class="modal-col">
+          <h4 class="modal-section-title">🥬 Орцнууд</h4>
+          <ul id="modalIngredients" class="ingr-list"></ul>
+        </div>
+        <div class="modal-col">
+          <h4 class="modal-section-title">👨‍🍳 Хийх арга</h4>
+          <ol id="modalSteps" class="steps-list"></ol>
+        </div>
+      </div>
+      <div class="modal-tip" id="modalTip"></div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div class="logo">Хоол<span class="accent">.</span>МН</div>
+      <p class="footer-text">Монголын шилдэг хоолны жорны платформ</p>
+      <p class="footer-copy">© 2025 Хоол.МН — Бүх эрх хамгаалагдсан</p>
+    </div>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
